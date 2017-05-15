@@ -1,0 +1,3 @@
+class Wordy
+
+end
