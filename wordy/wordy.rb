@@ -5,6 +5,7 @@ class Wordy
   def self.parse(sentence)
     words = sentence.split(' ')
     if words.include?('minus')
+      foo = 'bar'
       operator_position = words.index('minus')
       number1 = words[operator_position - 1].to_i
       number2 = words[operator_position + 1].to_i
