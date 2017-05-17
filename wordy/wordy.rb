@@ -52,24 +52,24 @@ class Wordy
   def self.method_missing(message, *args)
     Calculator.send(message, *args)
   end
+end
 
-  module Calculator
-    extend self
+module Calculator
+  extend self
 
-    def add(number_1, number_2)
-      number_1 + number_2
-    end
+  def add(number_1, number_2)
+    number_1 + number_2
+  end
 
-    def subtract(number_1, number_2)
-      number_1 - number_2
-    end
+  def subtract(number_1, number_2)
+    number_1 - number_2
+  end
 
-    def multiply(number_1, number_2)
-      number_1 * number_2
-    end
+  def multiply(number_1, number_2)
+    number_1 * number_2
+  end
 
-    def divide(number_1, number_2)
-      number_1 / number_2
-    end
+  def divide(number_1, number_2)
+    number_1 / number_2
   end
 end
