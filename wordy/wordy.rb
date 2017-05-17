@@ -5,7 +5,6 @@ class Wordy
   OPERATOR_REGEX = /([A-Za-z\s]+)/
   EXTRACT_NUMBERS_REGEX = /(-?\d+)[\A-Za-z+\s]+(-?\d+)/
 
-
   EQUATION_MAP = {
     'plus' => :add,
     'minus' => :subtract,
@@ -33,22 +32,6 @@ class Wordy
     sentence.gsub(EQUATION_REGEX, value.to_s)
   end
 
-  def self.add(number_1, number_2)
-    number_1 + number_2
-  end
-
-  def self.subtract(number_1, number_2)
-    number_1 - number_2
-  end
-
-  def self.multiply(number_1, number_2)
-    number_1 * number_2
-  end
-
-  def self.divide(number_1, number_2)
-    number_1 / number_2
-  end
-
   def self.equation_string(sentence)
     match = EQUATION_REGEX.match(sentence)
     return if match.nil?
@@ -64,5 +47,29 @@ class Wordy
     numbers_match = EXTRACT_NUMBERS_REGEX.match(equation_string)
 
     [numbers_match[1].to_i,numbers_match[2].to_i]
+  end
+
+  def self.method_missing(message, *args)
+    Calculator.send(message, *args)
+  end
+
+  module Calculator
+    extend self
+
+    def add(number_1, number_2)
+      number_1 + number_2
+    end
+
+    def subtract(number_1, number_2)
+      number_1 - number_2
+    end
+
+    def multiply(number_1, number_2)
+      number_1 * number_2
+    end
+
+    def divide(number_1, number_2)
+      number_1 / number_2
+    end
   end
 end
