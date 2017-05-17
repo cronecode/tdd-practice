@@ -3,7 +3,7 @@ class Wordy
   # step 2: evaluate
   EQUATION_REGEX = /(-?\d+\s\w+(\sby)?\s-?\d+)(.*)/
   OPERATOR_REGEX = /([A-Za-z]+)/
-  EXTRACT_NUMBERS_REGEX = /(-?\d+)\s\w+\s(\d+)/
+  EXTRACT_NUMBERS_REGEX = /(-?\d+)\s\w+\s(-?\d+)/
 
   EQUATION_MAP = {
     'plus' => :add

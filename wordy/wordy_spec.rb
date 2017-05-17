@@ -13,7 +13,7 @@ describe Wordy do
       expect(result).to eq(20)
     end
 
-    xit "adds two negative numbers" do
+    it "adds two negative numbers" do
       sentence = "What is -6 plus -14?"
 
       result = Wordy.parse(sentence)
