@@ -3,7 +3,9 @@ class Wordy
   # step 2: evaluate
 
   def self.parse(sentence)
-    words = sentence.split(' ')
+    first_equation = get_equation(sentence)
+
+    words = first_equation.split(' ')
     words.reject! { |word| word == "by"}
     if words.include?('minus')
       number1, number2 = get_operands(words, 'minus')
@@ -23,6 +25,13 @@ class Wordy
       number1 / number2
     end
 
+  end
+
+  def self.get_equation(sentence)
+    string_fragment_regex = /(-?\d+\s\w+(\sby)?\s-?\d+)/
+    regex_match = string_fragment_regex.match(sentence)
+
+    regex_match[0]
   end
 
 
