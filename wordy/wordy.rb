@@ -1,9 +1,10 @@
 class Wordy
   # step 1: find operator and operands
   # step 2: evaluate
-  EQUATION_REGEX = /(-?\d+\s\w+(\sby)?\s-?\d+)(.*)/
+  EQUATION_REGEX = /(-?\d+\s\w+(\sby)?\s-?\d+)/
   OPERATOR_REGEX = /([A-Za-z\s]+)/
   EXTRACT_NUMBERS_REGEX = /(-?\d+)[\A-Za-z+\s]+(-?\d+)/
+
 
   EQUATION_MAP = {
     'plus' => :add,
@@ -14,10 +15,22 @@ class Wordy
 
   def self.parse(sentence)
     eq_string = equation_string(sentence)
+    return extract_number(sentence) if eq_string.nil?
+
     operator = operator(eq_string)
 
     operator_message = EQUATION_MAP[operator]
-    self.send(operator_message, *equation_numbers(eq_string))
+    value = self.send(operator_message, *equation_numbers(eq_string))
+
+    self.parse(next_sentence(value, sentence))
+  end
+
+  def self.extract_number(sentence)
+    /-?\d+/.match(sentence)[0].to_i
+  end
+
+  def self.next_sentence(value, sentence)
+    sentence.gsub(EQUATION_REGEX, value.to_s)
   end
 
   def self.add(number_1, number_2)
@@ -37,7 +50,10 @@ class Wordy
   end
 
   def self.equation_string(sentence)
-    EQUATION_REGEX.match(sentence)[0]
+    match = EQUATION_REGEX.match(sentence)
+    return if match.nil?
+
+    match[1]
   end
 
   def self.operator(equation_string)

@@ -45,7 +45,7 @@ describe Wordy do
       expect(result).to eq(2)
     end
 
-    xit "evaluates multiple operations" do
+    it "evaluates multiple operations" do
       sentence = "What is 5 plus 13 plus 6?"
 
       result = Wordy.parse(sentence)
