@@ -35,5 +35,12 @@ describe Wordy do
 
        expect(result).to eq(8)
      end
+    it "divides two numbers" do
+      sentence = "What is 10 divided by 5?"
+
+      result = Wordy.parse(sentence)
+
+      expect(result).to eq(2)
+    end
   end
 end
