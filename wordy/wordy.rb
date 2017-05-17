@@ -2,12 +2,13 @@ class Wordy
   # step 1: find operator and operands
   # step 2: evaluate
   EQUATION_REGEX = /(-?\d+\s\w+(\sby)?\s-?\d+)(.*)/
-  OPERATOR_REGEX = /([A-Za-z]+)/
-  EXTRACT_NUMBERS_REGEX = /(-?\d+)\s\w+\s(-?\d+)/
+  OPERATOR_REGEX = /([A-Za-z\s]+)/
+  EXTRACT_NUMBERS_REGEX = /(-?\d+)[\A-Za-z+\s]+(-?\d+)/
 
   EQUATION_MAP = {
     'plus' => :add,
-    'minus' => :subtract
+    'minus' => :subtract,
+    'multiplied by' => :multiply
   }
 
   def self.parse(sentence)
@@ -26,12 +27,16 @@ class Wordy
     number_1 - number_2
   end
 
+  def self.multiply(number_1, number_2)
+    number_1 * number_2
+  end
+
   def self.equation_string(sentence)
     EQUATION_REGEX.match(sentence)[0]
   end
 
   def self.operator(equation_string)
-    OPERATOR_REGEX.match(equation_string)[0]
+    OPERATOR_REGEX.match(equation_string)[0].strip
   end
 
   def self.equation_numbers(equation_string)

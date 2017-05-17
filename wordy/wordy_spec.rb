@@ -29,7 +29,7 @@ describe Wordy do
       expect(result).to eq(1)
     end
 
-    xit "multiplies two numbers" do
+    it "multiplies two numbers" do
        sentence = "What is 2 multiplied by 4?"
 
        result = Wordy.parse(sentence)
