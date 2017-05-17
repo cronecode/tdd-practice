@@ -21,7 +21,7 @@ describe Wordy do
       expect(result).to eq(-20)
     end
 
-    xit "subtracts two positive numbers" do
+    it "subtracts two positive numbers" do
       sentence = "What is 3 minus 2?"
       
       result = Wordy.parse(sentence)

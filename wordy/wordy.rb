@@ -6,7 +6,8 @@ class Wordy
   EXTRACT_NUMBERS_REGEX = /(-?\d+)\s\w+\s(-?\d+)/
 
   EQUATION_MAP = {
-    'plus' => :add
+    'plus' => :add,
+    'minus' => :subtract
   }
 
   def self.parse(sentence)
@@ -19,6 +20,10 @@ class Wordy
 
   def self.add(number_1, number_2)
     number_1 + number_2
+  end
+
+  def self.subtract(number_1, number_2)
+    number_1 - number_2
   end
 
   def self.equation_string(sentence)
