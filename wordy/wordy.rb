@@ -13,7 +13,7 @@ class Wordy
       number1, number2 = get_operands(words, 'plus')
 
       number1 + number2
-    else
+    elsif words.include?('multiplied')
       number1, number2 = get_operands(words, 'multiplied')
 
       number1 * number2
