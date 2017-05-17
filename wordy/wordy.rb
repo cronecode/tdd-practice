@@ -8,7 +8,8 @@ class Wordy
   EQUATION_MAP = {
     'plus' => :add,
     'minus' => :subtract,
-    'multiplied by' => :multiply
+    'multiplied by' => :multiply,
+    'divided by' => :divide
   }
 
   def self.parse(sentence)
@@ -29,6 +30,10 @@ class Wordy
 
   def self.multiply(number_1, number_2)
     number_1 * number_2
+  end
+
+  def self.divide(number_1, number_2)
+    number_1 / number_2
   end
 
   def self.equation_string(sentence)
