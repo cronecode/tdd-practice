@@ -1,45 +1,37 @@
 class Wordy
   # step 1: find operator and operands
   # step 2: evaluate
+  EQUATION_REGEX = /(-?\d+\s\w+(\sby)?\s-?\d+)(.*)/
+  OPERATOR_REGEX = /([A-Za-z]+)/
+  EXTRACT_NUMBERS_REGEX = /(-?\d+)\s\w+\s(\d+)/
+
+  EQUATION_MAP = {
+    'plus' => :add
+  }
 
   def self.parse(sentence)
-    first_equation = get_equation(sentence)
+    eq_string = equation_string(sentence)
+    operator = operator(eq_string)
 
-    words = first_equation.split(' ')
-    words.reject! { |word| word == "by"}
-    if words.include?('minus')
-      number1, number2 = get_operands(words, 'minus')
-
-      number1 - number2
-    elsif words.include?('plus')
-      number1, number2 = get_operands(words, 'plus')
-
-      number1 + number2
-    elsif words.include?('multiplied')
-      number1, number2 = get_operands(words, 'multiplied')
-
-      number1 * number2
-    elsif words.include?('divided')
-      number1, number2 = get_operands(words, 'divided')
-
-      number1 / number2
-    end
-
+    operator_message = EQUATION_MAP[operator]
+    self.send(operator_message, *equation_numbers(eq_string))
   end
 
-  def self.get_equation(sentence)
-    string_fragment_regex = /(-?\d+\s\w+(\sby)?\s-?\d+)/
-    regex_match = string_fragment_regex.match(sentence)
-
-    regex_match[0]
+  def self.add(number_1, number_2)
+    number_1 + number_2
   end
 
+  def self.equation_string(sentence)
+    EQUATION_REGEX.match(sentence)[0]
+  end
 
-  def self.get_operands(words, operator)
-    operator_position = words.index(operator)
-    number1 = words[operator_position - 1].to_i
-    number2 = words[operator_position + 1].to_i
+  def self.operator(equation_string)
+    OPERATOR_REGEX.match(equation_string)[0]
+  end
 
-    return number1, number2
+  def self.equation_numbers(equation_string)
+    numbers_match = EXTRACT_NUMBERS_REGEX.match(equation_string)
+
+    [numbers_match[1].to_i,numbers_match[2].to_i]
   end
 end

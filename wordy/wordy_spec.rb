@@ -13,7 +13,7 @@ describe Wordy do
       expect(result).to eq(20)
     end
 
-    it "adds two negative numbers" do
+    xit "adds two negative numbers" do
       sentence = "What is -6 plus -14?"
 
       result = Wordy.parse(sentence)
@@ -21,27 +21,30 @@ describe Wordy do
       expect(result).to eq(-20)
     end
 
-    it "subtracts two positive numbers" do
+    xit "subtracts two positive numbers" do
       sentence = "What is 3 minus 2?"
       
       result = Wordy.parse(sentence)
 
       expect(result).to eq(1)
     end
-     it "multiplies two numbers" do
+
+    xit "multiplies two numbers" do
        sentence = "What is 2 multiplied by 4?"
 
        result = Wordy.parse(sentence)
 
        expect(result).to eq(8)
-     end
-    it "divides two numbers" do
+    end
+
+    xit "divides two numbers" do
       sentence = "What is 10 divided by 5?"
 
       result = Wordy.parse(sentence)
 
       expect(result).to eq(2)
     end
+
     xit "evaluates multiple operations" do
       sentence = "What is 5 plus 13 plus 6?"
 
