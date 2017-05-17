@@ -4,17 +4,22 @@ class Wordy
 
   def self.parse(sentence)
     words = sentence.split(' ')
+    words.reject! { |word| word == "by"}
     if words.include?('minus')
       number1, number2 = get_operands(words, 'minus')
 
       number1 - number2
-    else
+    elsif words.include?('plus')
       number1, number2 = get_operands(words, 'plus')
 
       number1 + number2
-    end
+    else
+      number1, number2 = get_operands(words, 'multiplied')
 
+      number1 * number2
+    end
   end
+
 
   def self.get_operands(words, operator)
     operator_position = words.index(operator)
