@@ -26,7 +26,14 @@ describe Wordy do
       
       result = Wordy.parse(sentence)
 
-      expect(result). to eq(1)
+      expect(result).to eq(1)
     end
+     it "multiplies two numbers" do
+       sentence = "What is 2 multiplied by 4?"
+
+       result = Wordy.parse(sentence)
+
+       expect(result).to eq(8)
+     end
   end
 end
