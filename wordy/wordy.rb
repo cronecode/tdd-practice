@@ -17,7 +17,12 @@ class Wordy
       number1, number2 = get_operands(words, 'multiplied')
 
       number1 * number2
+    elsif words.include?('divided')
+      number1, number2 = get_operands(words, 'divided')
+
+      number1 / number2
     end
+
   end
 
 
